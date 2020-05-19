@@ -8,7 +8,7 @@ element_num = range(1, 110)
 element_dict = {num: name for name, num in zip(element_name,element_num)}
 element_dict_rev = {name: num for name, num in zip(element_name,element_num)}
 
-print(element_dict)
+print("\nGUESS THE NAME OF THE ELEMENT!\n")
 
 class GuessElement():
 
@@ -18,21 +18,33 @@ class GuessElement():
 
         pass
 
-    def guess_element(self):
-
+    def guess_element(self, score = 10):
+        
         '''This method display the atomic number and asks for the name of the element'''
 
-        while True:
+        self.score = score
 
-            rand_num = randint(1, 10)
+        n = 1
+
+        while score >= 0:
+
+            rand_num = randint(1, 109)
             playerguess = input(f"Guess the name of the element with the atomic number {rand_num}: ")
             
             if playerguess.upper() == element_dict[rand_num].upper():
+
+                score = score + 10
                 print("You are right!")
+                print(f"Score: {score}")
+
+                n += 1
 
             else:
-                print("Incorrect!")
-                print(f"Right answer is {element_dict[rand_num]}")
+
+                score = score - 1
+                print(f"Incorrect! It's {element_dict[rand_num]}")
+                print(f"Score: {score}")
+                
                 continue
 
 
