@@ -23,30 +23,73 @@ class GuessElement():
         '''This method display the atomic number and asks for the name of the element'''
 
         self.score = score
+        
+        print("1. Practice\n2. Quiz")
+        try:
+            select_game = int(input("Choose what you like to do (1 or 2): "))
+        except ValueError:
+            print("Please enter either 1 or 2")
+        if select_game not in (1, 2):
+            print("Please enter either 1 or 2")
+        
+        while select_game == 1:
 
-        n = 1
-
-        while score >= 0:
-
-            rand_num = randint(1, 109)
-            playerguess = input(f"Guess the name of the element with the atomic number {rand_num}: ")
+            print("\nSelect the range of atomic numbers: ")
             
-            if playerguess.upper() == element_dict[rand_num].upper():
+            try:
+                z1 = int(input("Enter the start of range for practice: "))
+            except ValueError:
+                print("Please enter a number between 1 and 108")
+            if z1 not in list(range(1, 109)):
+                print("Please enter a number between 1 and 108")            
+            
+            try:
+                z2 = int(input("Enter the end of range for practice (last element: 109): "))
+            except ValueError:
+                print("Please enter a number between 2 and 109")
+            if z2 not in list(range(2, 110)):
+                print("Please enter a number between 2 and 109")
 
-                score = score + 10
-                print("You are right!")
-                print(f"Score: {score}")
+            game = 'on'
 
-                n += 1
+            while game == 'on':
 
-            else:
+                rand_num = randint(z1, z2)
 
-                score = score - 1
-                print(f"Incorrect! It's {element_dict[rand_num]}")
-                print(f"Score: {score}")
+                playerguess = input(f"\nGuess the name of the element with the atomic number {rand_num}: ") 
                 
-                continue
+                if playerguess.lower() == element_dict[rand_num].lower():
+                    print("Correct!")
+                    continue
 
+                else:
+                    print(f"Incorrect! It's {element_dict[rand_num]}")                      
+                    continue       
+
+        while select_game == 2:
+            
+            n = 1
+
+            while score >= 0:
+
+                rand_num = randint(1, 109)
+                playerguess = input(f"Guess the name of the element with the atomic number {rand_num}: ")
+                
+                if playerguess.lower() == element_dict[rand_num].lower():
+
+                    score = score + 10
+                    print("Correct!")
+                    print(f"Score: {score}")
+
+                    n += 1
+
+                else:
+
+                    score = score - 1
+                    print(f"Incorrect! It's {element_dict[rand_num]}")
+                    print(f"Score: {score}")
+                    
+                    continue
 
 guesselement1 = GuessElement()
 guesselement1.guess_element()
