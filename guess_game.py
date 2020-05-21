@@ -24,13 +24,23 @@ class GuessElement():
 
         self.score = score
         
-        print("1. Practice\n2. Quiz")
-        try:
-            select_game = int(input("Choose what you like to do (1 or 2): "))
-        except ValueError:
-            print("Please enter either 1 or 2")
-        if select_game not in (1, 2):
-            print("Please enter either 1 or 2")
+        print("1. Practice")
+        print("2. Quiz - Guess the name of Element")
+        print("3. Quiz - Guess the Atomic Number")
+        print("4. Exit\n")
+
+        while True:
+
+            try:
+                select_game = int(input("Choose what you like to do (enter 1 to 4): "))
+            except ValueError:
+                print("Please choose a game and enter it's number")
+                continue
+            if select_game not in (1, 2, 3, 4):
+                print("Please choose a game and enter it's number")
+                continue
+            else:
+                break
         
         while select_game == 1:
 
@@ -91,10 +101,42 @@ class GuessElement():
                     
                     continue
 
+        while select_game == 3:
+            
+            n = 1
+
+            while score >= 0:
+
+                rand_num = randint(0, 108)
+
+                while True:
+
+                    try:
+                        playerguess = int(input(f"Guess the atomic number for {element_name[rand_num]}: "))
+                    except ValueError:
+                        print("please enter the atomic number\n")
+                        continue
+                    else:
+                        break
+                
+                if playerguess == element_dict_rev[element_name[rand_num]]:
+
+                    score = score + 10
+                    print("Correct!")
+                    print(f"Score: {score}")
+
+                    n += 1
+
+                else:
+
+                    score = score - 1
+                    print(f"Incorrect! It's {element_dict_rev[element_name[rand_num]]}")
+                    print(f"Score: {score}")
+                    
+                    continue
+
+        if select_game == 4:
+            print("See you later!")          
+
 guesselement1 = GuessElement()
 guesselement1.guess_element()
-
-
-
-
-
