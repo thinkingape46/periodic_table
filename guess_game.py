@@ -1,7 +1,7 @@
 # This is a simple guess game, player has to guess the name of the element when a number is displayed.
 
 from random import randint
-
+import time
 element_name = ['Hydrogen', 'Helium', 'Lithium', 'Beryllium', 'Boron', 'Carbon', 'Nitrogen', 'Oxygen', 'Fluorine', 'Neon', 'Sodium', 'Magnesium', 'Aluminum', 'Silicon', 'Phosphorus', 'Sulfur', 'Chlorine', 'Argon', 'Potassium', 'Calcium', 'Scandium', 'Titanium', 'Vanadium', 'Chromium', 'Manganese', 'Iron', 'Cobalt', 'Nickel', 'Copper', 'Zinc', 'Gallium', 'Germanium', 'Arsenic', 'Selenium', 'Bromine', 'Krypton', 'Rubidium', 'Strontium', 'Yttrium', 'Zirconium', 'Niobium', 'Molybdenum', 'Technetium', 'Ruthenium', 'Rhodium', 'Palladium', 'Silver', 'Cadmium', 'Indium', 'Tin', 'Antimony', 'Tellurium', 'Iodine', 'Xenon', 'Cesium', 'Barium', 'Lanthanum', 'Cerium', 'Praseodymium', 'Neodymium', 'Promethium', 'Samarium', 'Europium', 'Gadolinium', 'Terbium', 'Dysprosium', 'Holmium', 'Erbium', 'Thulium', 'Ytterbium', 'Lutetium', 'Hafnium', 'Tantalum', 'Tungsten', 'Rhenium', 'Osmium', 'Iridium', 'Platinum', 'Gold', 'Mercury', 'Thallium', 'Lead', 'Bismuth', 'Polonium', 'Astatine', 'Radon', 'Francium', 'Radium', 'Actinium', 'Thorium', 'Protactinium', 'Uranium', 'Neptunium', 'Plutonium', 'Americium', 'Curium', 'Berkelium', 'Californium', 'Einsteinium', 'Fermium', 'Mendelevium', 'Nobelium', 'Lawrencium', 'Rutherfordium', 'Dubnium', 'Seaborgium', 'Bohrium', 'Hassium', 'Meitnerium']
 b = ['', 'H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al', 'Si', 'P', 'S', 'Cl', 'Ar', 'K', 'Ca', 'Sc', 'Ti', 'V', 'Cr', 'Mn', 'Fe', 'Co', 'Ni', 'Cu', 'Zn', 'Ga', 'Ge', 'As', 'Se', 'Br', 'Kr', 'Rb', 'Sr', 'Y', 'Zr', 'Nb', 'Mo', 'Tc', 'Ru', 'Rh', 'Pd', 'Ag', 'Cd', 'In', 'Sn', 'Sb', 'Te', 'I', 'Xe', 'Cs', 'Ba', 'La', 'Ce', 'Pr', 'Nd', 'Pm', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy', 'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Hf', 'Ta', 'W', 'Re', 'Os', 'Ir', 'Pt', 'Au', 'Hg', 'Tl', 'Pb', 'Bi', 'Po', 'At', 'Rn', 'Fr', 'Ra', 'Ac', 'Th', 'Pa', 'U', 'Np', 'Pu', 'Am', 'Cm', 'Bk', 'Cf', 'Es', 'Fm', 'Md', 'No', 'Lr', 'Rf', 'Db', 'Sg', 'Bh', 'Hs', 'Mt']
 element_num = range(1, 110)
@@ -9,7 +9,7 @@ element_num = range(1, 110)
 element_dict = {num: name for name, num in zip(element_name,element_num)}
 element_dict_rev = {name: num for name, num in zip(element_name,element_num)}
 
-print("\nGUESS THE NAME OF THE ELEMENT!\n")
+print("\nMODERN PERIODIC TABLE\n")
 
 class GuessElement():
 
@@ -28,8 +28,10 @@ class GuessElement():
         print("\n1. Display periodic table")
         print("2. Practice")
         print("3. Quiz - Guess the name of Element")
-        print("4. Quiz - Guess the Atomic Number")
+        print("4. Quiz - Guess the Atomic Number (Z)")
         print("5. Exit\n")
+        # print("Click one the right one")
+        # print("Groups and Periods")
 
         while True:
 
@@ -45,7 +47,7 @@ class GuessElement():
                 break
 
         if select_game == 1:
-            
+            t1 = time.time()
             print('\n')
             print(b[1] + '\t'*17 + b[2])
             print(b[3] + '\t' + b[4] + '\t'*11 + '\t'.join([b[n] for n in range(5, 11)]))
@@ -58,19 +60,24 @@ class GuessElement():
             print('\t'*3 + '\t'.join([b[n] for n in range(58, 72)]))
             print('\t'*3 + '\t'.join([b[n] for n in range(90, 104)]))
             print('\n')
+            t2 = time.time()
+            t_load = format((t2 - t1), '.5g')
+            photon_distance = format((t2 - t1) * 299792, '.5g')
+            print(f"It took {t_load} seconds to print all the elements.")
+            print(f"Given the same amount of time to a photon, it would have travelled {photon_distance} kms max.")
 
             while True:
 
                 try:
-                    x = input("Please press anything to exit: ")
+                    x = input("\nEnter any character to go to main menu: ")
                 except:
                     print("I am not using this")
                 if x != "I don't think you will type this!":
                     guesselement1.guess_element()
                     break
-                else:
-                    print("I did't think you will type this string!\n")
-                    break
+                elif x == "I don't think you will type this!":
+                    print("I did't think you will pull this string!\n")
+                    continue
                     
         while select_game == 2:
 
